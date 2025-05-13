@@ -6,3 +6,6 @@ const config = {
   height: 1080,
   backgroundColor: 0x5f6e7a
 }
+
+const game = new Phaser.Game(comfig)
+console.log(game)
