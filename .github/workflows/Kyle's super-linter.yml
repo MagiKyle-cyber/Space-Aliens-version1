@@ -1,34 +1,29 @@
+##################################################
+# Run Kyle's Super Linter against code base #
+##################################################
+
+---
 name: Kyle's Super Linter
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+on: [push, pull_request]
 
 jobs:
-  lint:
-    name: Lint Code Base
+  run-linters:
+    name: Kyle's Super Linter
     runs-on: ubuntu-latest
-    timeout-minutes: 10
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+      - name: Check out Git repository 🚦
+        uses: actions/checkout@main
 
-      - name: Set up Node (for JavaScript/TypeScript linting)
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20' # Adjust version as needed
-
-      - name: Run Super Linter
-        uses: github/super-linter@v5
+      - name: Run GitHub Super Linter 🚀
+        uses: github/super-linter@main
         env:
+          VALIDATE_ALL_CODEBASE: true
+          LINTER_RULES_PATH: /
+          VALIDATE_HTML: true
+          VALIDATE_CSS: true
+          VALIDATE_JAVASCRIPT_ES: true
+          VALIDATE_PHP_BUILTIN: true
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VALIDATE_ALL_CODEBASE: true
-          LINTER_RULES_PATH: .github/linters
-          LOG_LEVEL: NOTICE
-          RUN_LOCAL: true
